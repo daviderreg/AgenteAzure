@@ -1,0 +1,5 @@
+resource_group_name  = "rg-hermes-azure"
+location             = "germanywestcentral"
+name_prefix          = "hermes"
+storage_account_name = "CHANGE_ME"
+container_image      = "nousresearch/hermes-agent:latest"

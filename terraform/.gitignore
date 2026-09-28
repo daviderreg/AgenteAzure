@@ -1,0 +1,243 @@
+# ============================================================
+# Terraform
+# ============================================================
+
+# Terraform working directory
+.terraform/
+**/.terraform/
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+terraform.tfstate
+terraform.tfstate.*
+
+# Terraform crash logs
+crash.log
+crash.*.log
+
+# Terraform variable files containing secrets
+*.tfvars
+*.tfvars.json
+
+# Exception: keep example variable files
+!*.tfvars.example
+!*.tfvars.sample
+
+# Terraform plans
+*.tfplan
+*.plan
+
+# Terraform override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform CLI configuration
+.terraformrc
+terraform.rc
+
+
+# ============================================================
+# Azure / Local credentials
+# ============================================================
+
+# Azure CLI local configuration
+.azure/
+
+# Azure credentials / service principal files
+azure_credentials*
+azure-credentials*
+service-principal*
+*.pem
+*.key
+*.pfx
+*.cer
+
+
+# ============================================================
+# Environment / secrets
+# ============================================================
+
+.env
+.env.*
+!.env.example
+!.env.sample
+
+*.secret
+*.secrets
+secrets/
+**/secrets/
+
+# Local credential/config files
+credentials/
+**/credentials/
+
+
+# ============================================================
+# Hermes local data
+# ============================================================
+
+# Hermes persistent runtime data
+data/
+**/data/
+
+# Hermes runtime/home directories
+hermes-data/
+**/hermes-data/
+
+# Sessions, memory, credentials and runtime state
+sessions/
+**/sessions/
+
+memory/
+**/memory/
+
+# Local Hermes configuration
+config.yaml
+config.yml
+
+# Backup copies of Hermes configuration
+*.before-setup
+*.backup
+*.bak
+
+
+# ============================================================
+# Logs
+# ============================================================
+
+*.log
+logs/
+**/logs/
+
+
+# ============================================================
+# OS files
+# ============================================================
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+
+# ============================================================
+# Editors / IDEs
+# ============================================================
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+*.iml
+
+# Visual Studio
+.vs/
+
+# Vim
+*.swp
+*.swo
+
+# Emacs
+*~
+
+
+# ============================================================
+# Node.js
+# ============================================================
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+.npm/
+
+
+# ============================================================
+# Python
+# ============================================================
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+.venv/
+venv/
+env/
+ENV/
+
+*.egg-info/
+dist/
+build/
+
+.pyre/
+.pytype/
+
+
+# ============================================================
+# Docker
+# ============================================================
+
+.docker/
+docker-compose.override.yml
+
+# Local Docker environment files
+docker.env
+docker-compose.env
+
+
+# ============================================================
+# Temporary / generated files
+# ============================================================
+
+tmp/
+temp/
+.cache/
+.cache-*/
+*.tmp
+*.temp
+
+*.pid
+*.pid.lock
+
+# Test / debug output
+test-output/
+debug-output/
+
+
+# ============================================================
+# Project-specific local files
+# ============================================================
+
+# Local notes / scratch files
+scratch/
+notes-local/
+*.local
+
+# Command output dumps
+*.out
+*.dump
+
+# Generated archives
+*.zip
+*.tar
+*.tar.gz
+*.tgz
