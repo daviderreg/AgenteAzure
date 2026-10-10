@@ -124,6 +124,16 @@ resource "azurerm_container_app" "hermes" {
     identity_ids = [azurerm_user_assigned_identity.hermes.id]
   }
 
+  secret {
+    name  = "discord-bot-token"
+    value = var.discord_bot_token
+  }
+
+  secret {
+    name  = "ollama-api-key"
+    value = var.ollama_api_key
+  }
+
   template {
     min_replicas = 1
     max_replicas = 1
@@ -134,13 +144,29 @@ resource "azurerm_container_app" "hermes" {
       cpu    = 1.0
       memory = "2Gi"
 
-      command = ["/bin/sh"]
-      args    = ["-c", "echo ARGS_TEST_OK; sleep 3600"]
+      command = ["/bin/sh", "-c"]
+      args    = ["mkdir -p /opt/data && if [ ! -f /opt/data/config.yaml ]; then printf 'model:\\n  provider: \"ollama-cloud\"\\n  default: \"nemotron-3-super:cloud\"\\n  base_url: \"https://ollama.com/v1\"\\n' > /opt/data/config.yaml; else python -c \"from pathlib import Path; p=Path('/opt/data/config.yaml'); s=p.read_text(); s=s.replace('default: \\\"anthropic/claude-opus-4.6\\\"', 'default: \\\"nemotron-3-super:cloud\\\"').replace('provider: \\\"auto\\\"', 'provider: \\\"ollama-cloud\\\"').replace('base_url: \\\"https://openrouter.ai/api/v1\\\"', 'base_url: \\\"https://ollama.com/v1\\\"'); p.write_text(s)\"; fi && exec hermes gateway run"]
 
       env {
         name  = "HERMES_HOME"
         value = "/opt/data"
       }
+
+      env {
+        name        = "DISCORD_BOT_TOKEN"
+        secret_name = "discord-bot-token"
+      }
+
+      env {
+        name        = "OLLAMA_API_KEY"
+        secret_name = "ollama-api-key"
+      }
+
+      env {
+        name  = "DISCORD_ALLOWED_USERS"
+        value = var.discord_id
+      }
+
     }
 
   }

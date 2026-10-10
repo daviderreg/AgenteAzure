@@ -24,3 +24,20 @@ variable "container_image" {
   description = "Hermes Agent container image."
   type        = string
 }
+
+variable "discord_id" {
+  type        = string
+  description = "User ID Discord"
+}
+
+variable "discord_bot_token" {
+  description = "Discord bot token for Hermes."
+  type        = string
+  sensitive   = true
+}
+
+variable "ollama_api_key" {
+  description = "Ollama Cloud API key for Hermes."
+  type        = string
+  sensitive   = true
+}
