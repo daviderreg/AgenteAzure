@@ -144,9 +144,6 @@ resource "azurerm_container_app" "hermes" {
       cpu    = 1.0
       memory = "2Gi"
 
-      command = ["/bin/sh", "-c"]
-      args    = ["mkdir -p /opt/data && if [ ! -f /opt/data/config.yaml ]; then printf 'model:\\n  provider: \"ollama-cloud\"\\n  default: \"nemotron-3-super:cloud\"\\n  base_url: \"https://ollama.com/v1\"\\n' > /opt/data/config.yaml; else python -c \"from pathlib import Path; p=Path('/opt/data/config.yaml'); s=p.read_text(); s=s.replace('default: \\\"anthropic/claude-opus-4.6\\\"', 'default: \\\"nemotron-3-super:cloud\\\"').replace('provider: \\\"auto\\\"', 'provider: \\\"ollama-cloud\\\"').replace('base_url: \\\"https://openrouter.ai/api/v1\\\"', 'base_url: \\\"https://ollama.com/v1\\\"'); p.write_text(s)\"; fi && exec hermes gateway run"]
-
       env {
         name  = "HERMES_HOME"
         value = "/opt/data"
@@ -165,6 +162,21 @@ resource "azurerm_container_app" "hermes" {
       env {
         name  = "DISCORD_ALLOWED_USERS"
         value = var.discord_id
+      }
+
+      env {
+        name  = "AZURE_STORAGE_ACCOUNT"
+        value = var.storage_account_name
+      }
+
+      env {
+        name  = "AZURE_STORAGE_CONTAINER"
+        value = azurerm_storage_container.backups.name
+      }
+
+      env {
+        name  = "AZURE_BACKUP_PREFIX"
+        value = "auto"
       }
 
     }
